@@ -1,0 +1,20 @@
+{
+  "name": "net_mon",
+  "version": "1.0.0",
+  "description": "A RESTful network monitoring component for measuring and reporting network link latencies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mshokrnezhad/Net_Mon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mshokrnezhad/Net_Mon/issues"
+  },
+  "homepage": "https://github.com/mshokrnezhad/Net_Mon#readme"
+}
