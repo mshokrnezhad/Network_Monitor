@@ -11,4 +11,4 @@ const nodeSchema = mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Node", nodeSchema);
+module.exports = mongoose.model("Nodes", nodeSchema);

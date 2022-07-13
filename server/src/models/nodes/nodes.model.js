@@ -1,5 +1,5 @@
 const fs = require("fs");
-const node = require("./node.mongo");
+const nodes = require("./nodes.mongo");
 const { parse } = require("csv-parse");
 const path = require("path");
 
@@ -30,7 +30,7 @@ function loadNodesData() {
 }
 
 async function getAllNodes() {
-  return await node.find(
+  return await nodes.find(
     {},
     {
       _id: 0,
@@ -41,8 +41,7 @@ async function getAllNodes() {
 
 async function saveNode(data) {
   try {
-    console.log(data.nodeName)
-    await node.updateOne(
+    await nodes.updateOne(
       {
         nodeName: data.nodeName,
       },
