@@ -1,7 +1,7 @@
 const express = require("express");
 const { httpGetAllNodes } =  require("./nodes.controller")
-const nodeRouter = express.Router();
+const nodesRouter = express.Router();
 
-nodeRouter.get("/", httpGetAllNodes);
+nodesRouter.get("/", httpGetAllNodes);
 
-module.exports = nodeRouter;
+module.exports = nodesRouter;
