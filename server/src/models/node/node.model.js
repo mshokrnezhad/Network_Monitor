@@ -23,7 +23,7 @@ function loadNodesData() {
       })
       .on("end", async () => {
         const numNodes = (await getAllNodes()).length;
-        console.log(`The number of nodes is ${numNodes}.`);
+        console.log(`the number of nodes is ${numNodes}.`);
         resolve();
       });
   });
@@ -41,6 +41,7 @@ async function getAllNodes() {
 
 async function saveNode(data) {
   try {
+    console.log(data.nodeName)
     await node.updateOne(
       {
         nodeName: data.nodeName,
