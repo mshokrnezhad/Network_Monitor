@@ -44,9 +44,11 @@ async function saveNode(data) {
     await nodes.updateOne(
       {
         nodeName: data.nodeName,
+        nodeAddress: data.nodeAddress,
       },
       {
         nodeName: data.nodeName,
+        nodeAddress: data.nodeAddress,
       },
       {
         upsert: true,

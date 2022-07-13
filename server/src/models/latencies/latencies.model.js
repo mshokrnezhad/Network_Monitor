@@ -38,9 +38,12 @@ async function searchNodeName(nodeName) {
 }
 
 async function saveLatency(data) {
-  await launches.findOneAndUpdate(
+  await latencies.findOneAndUpdate(
     {
-      nodeName: data.nodeName,
+      to: data.to,
+      from: data.from,
+      date: data.date,
+      rtt: data.rtt
     },
     data,
     {
