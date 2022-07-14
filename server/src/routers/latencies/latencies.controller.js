@@ -8,7 +8,7 @@ const { getPagination } = require("../../services/query");
 
 async function httpGetAllLatencies(req, res) {
   const { skip, limit } = getPagination(req.query);
-  const launches = await getAllLatencies(skip, limit);
+  const latencies = await getAllLatencies(skip, limit);
   return res.status(200).json(latencies);
 }
 

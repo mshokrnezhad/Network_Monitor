@@ -19,8 +19,6 @@ async function getAllLatenciesPerName(nodeName) {
   return await latencies
     .find({ from: nodeName }, { _id: 0, __v: 0 })
     .sort({ date: 1 })
-    .skip(skip)
-    .limit(limit);
 }
 
 async function addNewLatency(latency) {
