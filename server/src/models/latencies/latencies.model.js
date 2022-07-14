@@ -1,12 +1,5 @@
 const latencies = require("./latencies.mongo");
 
-/* const latency = {
-  date: Date.now(),
-  from: "",
-  to: "",
-  rtt: 0,
-}; */
-
 async function getAllLatencies(skip, limit) {
   return await latencies
     .find({}, { _id: 0, __v: 0 })
@@ -18,11 +11,13 @@ async function getAllLatencies(skip, limit) {
 async function getAllLatenciesPerName(nodeName) {
   return await latencies
     .find({ from: nodeName }, { _id: 0, __v: 0 })
-    .sort({ date: 1 })
+    .sort({ date: 1 });
 }
 
-async function addNewLatency(latency) {
-  await saveLatency(latency);
+async function addNewLatencies(newLatencies) {
+  newLatencies.map(async (latency) => {
+    await saveLatency(latency);
+  });
 }
 
 async function findLatency(filter) {
@@ -41,7 +36,6 @@ async function saveLatency(data) {
       to: data.to,
       from: data.from,
       date: data.date,
-      rtt: data.rtt
     },
     data,
     {
@@ -53,6 +47,6 @@ async function saveLatency(data) {
 module.exports = {
   getAllLatencies,
   searchNodeName,
-  addNewLatency,
+  addNewLatencies,
   getAllLatenciesPerName,
 };

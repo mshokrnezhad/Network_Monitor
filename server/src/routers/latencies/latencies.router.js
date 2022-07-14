@@ -2,13 +2,13 @@ const express = require("express");
 const {
   httpGetAllLatencies,
   httpGetAllLatenciesPerNode,
-  httpPostNewLatency,
+  httpPostNewLatencies,
 } = require("./latencies.controller");
 
 const latenciesRouter = express.Router();
 
 latenciesRouter.get("/", httpGetAllLatencies);
 latenciesRouter.get("/:name", httpGetAllLatenciesPerNode);
-latenciesRouter.post("/", httpPostNewLatency);
+latenciesRouter.post("/", httpPostNewLatencies);
 
 module.exports = latenciesRouter;

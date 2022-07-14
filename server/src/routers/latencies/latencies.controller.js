@@ -1,7 +1,7 @@
 const {
   getAllLatencies,
   getAllLatenciesPerName,
-  addNewLatency,
+  addNewLatencies,
   searchNodeName,
 } = require("../../models/latencies/latencies.model");
 const { getPagination } = require("../../services/query");
@@ -26,21 +26,23 @@ async function httpGetAllLatenciesPerNode(req, res) {
   return res.status(200).json(latencies);
 }
 
-async function httpPostNewLatency(req, res) {
-  const latency = req.body;
+async function httpPostNewLatencies(req, res) {
+  const newLatencies = req.body;
 
-  if (!latency.date || !latency.from || !latency.to || !latency.rtt) {
-    return res.status(400).json({
-      error: "😩  at least one of the required launch properties is missed.",
-    });
-  }
+  /* newLatencies.map((latency) => {
+    if (!latency.date || !latency.from || !latency.to || !latency.rtt) {
+      return res.status(400).json({
+        error: "😩  at least one of the required latency properties is missed.",
+      });
+    }
+  }); */
 
-  await addNewLatency(latency);
-  return res.status(201).json(latency);
+  await addNewLatencies(newLatencies);
+  return res.status(201).json(newLatencies);
 }
 
 module.exports = {
   httpGetAllLatencies,
   httpGetAllLatenciesPerNode,
-  httpPostNewLatency,
+  httpPostNewLatencies,
 };

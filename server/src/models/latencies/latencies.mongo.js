@@ -12,7 +12,19 @@ const latenciesSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  rtt: {
+  maxRTT: {
+    type: Number,
+    required: true,
+  },
+  minRTT: {
+    type: Number,
+    required: true,
+  },
+  avgRTT: {
+    type: Number,
+    required: true,
+  },
+  loss: {
     type: Number,
     required: true,
   },
