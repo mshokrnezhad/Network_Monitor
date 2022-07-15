@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
-    "ping": "^0.4.2"
+    "lodash": "^4.17.21",
+    "ping": "^0.4.2",
+    "prompt-sync": "^4.2.0"
   }
 }
