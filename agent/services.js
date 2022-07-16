@@ -11,6 +11,7 @@ var PUBLISH_INTERVAL = 60000 - 1000; //15000 - 1000
 var NODES = [];
 var NODE_NAME = "";
 var results = [];
+var isDataPublished = false;
 
 async function getAllNodes() {
   NODES = await httpGetAllNodes();
@@ -52,6 +53,13 @@ function measureLinks() {
 
   async function pingNodes() {
     console.log("🦀 measuring links...");
+
+    if (isDataPublished) {
+      results = [];
+      isDataPublished = false;
+    }
+
+    console.log(results);
 
     for (let node of await NODES) {
       if (node.nodeName !== NODE_NAME) {
@@ -114,22 +122,11 @@ function publishResults() {
       }
     });
 
+    isDataPublished = true;
+
     await httpPostMeasuredData(data);
   }
 }
-
-/*
-
-
-var publishID = setInterval(printResults, PUBLISH_INTERVAL);
-function printResults() {
-  console.log("---", Date.now(), "---");
-  results.map((result) => {
-    console.log(result.to, result.min, result.max, result.avg, result.loss);
-  });
-  results = [];
-}
- */
 
 module.exports = {
   getAllNodes,
