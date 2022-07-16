@@ -1,5 +1,6 @@
 const axios = require("axios");
-const API_URL = "http://23.22.67.147:8000/v1";
+require("dotenv").config();
+const API_URL = process.env.API_URL;
 
 async function httpGetAllNodes() {
   const response = await axios({
