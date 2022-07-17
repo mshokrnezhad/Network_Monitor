@@ -1,4 +1,5 @@
 const latencies = require("./latencies.mongo");
+const nodes = require("../nodes/nodes.mongo");
 const _ = require("lodash");
 const { getAllNodes } = require("../nodes/nodes.model");
 
@@ -12,53 +13,12 @@ async function getAllLatencies(limit) {
   return (processedLatencies = processLatencies(NODES, allLatencies));
 }
 
-async function getAllLatenciesPerName(nodeName, limit) {
-  const NODES = await getAllNodes();
-
-  const allLatenciesPerNode = await latencies
-    .find({ from: nodeName, date: { $gt: limit } }, { _id: 0, __v: 0 })
-    .sort({ date: 1 });
-  console.log(allLatenciesPerNode);
-
-  return (processedLatenciesPerNode = processLatenciesPerNode(
-    nodeName,
-    NODES,
-    allLatenciesPerNode
-  ));
-}
-
-async function addNewLatencies(newLatencies) {
-  newLatencies.map(async (latency) => {
-    await saveLatency(latency);
-  });
-}
-
-async function findLatency(filter) {
-  return await latencies.findOne(filter);
-}
-
-async function searchNodeName(nodeName) {
-  return await findLatency({
-    nodeName: nodeName,
-  });
-}
-
-async function saveLatency(data) {
-  await latencies.findOneAndUpdate(
-    {
-      to: data.to,
-      from: data.from,
-      date: data.date,
-    },
-    data,
-    {
-      upsert: true,
-    }
-  );
-}
-
 function processLatencies(NODES, allLatencies) {
   var processedLatencies = [];
+
+  if (_.isEmpty(allLatencies)) {
+    return { error: "🤫 no data is available yet." };
+  }
 
   NODES.map((NODE1) => {
     NODES.map((NODE2) => {
@@ -106,8 +66,32 @@ function processLatencies(NODES, allLatencies) {
   return processedLatencies;
 }
 
+async function findNode(nodeName) {
+  return await nodes.findOne({
+    nodeName: nodeName,
+  });
+}
+
+async function getAllLatenciesPerName(nodeName, limit) {
+  const NODES = await getAllNodes();
+
+  const allLatenciesPerNode = await latencies
+    .find({ from: nodeName, date: { $gt: limit } }, { _id: 0, __v: 0 })
+    .sort({ date: 1 });
+
+  return (processedLatenciesPerNode = processLatenciesPerNode(
+    nodeName,
+    NODES,
+    allLatenciesPerNode
+  ));
+}
+
 function processLatenciesPerNode(nodeName, NODES, allLatencies) {
   var processedLatencies = [];
+
+  if (_.isEmpty(allLatencies)) {
+    return { error: "🤫 no data is available for the given node name." };
+  }
 
   NODES.map((NODE2) => {
     if (nodeName !== NODE2.nodeName) {
@@ -153,9 +137,29 @@ function processLatenciesPerNode(nodeName, NODES, allLatencies) {
   return processedLatencies;
 }
 
+async function addNewLatencies(newLatencies) {
+  newLatencies.map(async (latency) => {
+    await saveLatency(latency);
+  });
+}
+
+async function saveLatency(data) {
+  await latencies.findOneAndUpdate(
+    {
+      to: data.to,
+      from: data.from,
+      date: data.date,
+    },
+    data,
+    {
+      upsert: true,
+    }
+  );
+}
+
 module.exports = {
   getAllLatencies,
-  searchNodeName,
+  findNode,
   addNewLatencies,
   getAllLatenciesPerName,
 };

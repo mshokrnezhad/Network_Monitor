@@ -2,7 +2,7 @@ const {
   getAllLatencies,
   getAllLatenciesPerName,
   addNewLatencies,
-  searchNodeName,
+  findNode,
 } = require("../../models/latencies/latencies.model");
 const { processQuery } = require("../../services/query");
 
@@ -15,9 +15,9 @@ async function httpGetAllLatencies(req, res) {
 async function httpGetAllLatenciesPerNode(req, res) {
   const nodeName = req.params.name;
   const { limit } = processQuery(req.query);
-  const isNodeNameAvailable = await searchNodeName(nodeName);
+  const nodeInfo = await findNode(nodeName);
 
-  if (!isNodeNameAvailable) {
+  if (!nodeInfo) {
     return res
       .status(404)
       .json({ error: "😩 the node name is not available." });

@@ -6,4 +6,13 @@ function processQuery(query) {
   return { limit };
 }
 
+/* function validateNodeName(NODES, nodeName) {
+  const nodeInfo = _.find(NODES, (node) => {
+    console.log(node.nodeName);
+    return node.nodeName === nodeName;
+  });
+
+  return nodeInfo ? true : false;
+} */
+
 module.exports = { processQuery };
