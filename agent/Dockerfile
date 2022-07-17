@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV NODE_NAME = "MC0"
+
 COPY ./ ./agent
 
 WORKDIR /agent

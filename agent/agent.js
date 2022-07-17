@@ -8,7 +8,7 @@ const {
 
 async function startAgent() {
   await getAllNodes();
-  await getNodeName();
+  //await getNodeName();
   validateNodeName();
   measureLinks();
   publishResults();

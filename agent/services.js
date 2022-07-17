@@ -9,7 +9,7 @@ const readline = require("readline").createInterface({
 var PING_INTERVAL = 5000;
 var PUBLISH_INTERVAL = 60000 - 1000; //15000 - 1000
 var NODES = [];
-var NODE_NAME = "";
+const NODE_NAME = process.env.NODE_NAME;
 var results = [];
 var isDataPublished = false;
 
