@@ -11,21 +11,23 @@ The component consists of the following two modules:
 
 How to run?
 
-1- Update .env files in both server and agent folders regarding your configuration.
+1- Update .env files in both the server and agent folders regarding your configuration.
 
 2- Update miniclouds info in nodes.csv located in ./server/data.
 
-3- run "docker build . -t DOCKERHUB_NAME/netmonserver" in ./server to create server docker image.
+3- run "docker build . -t DOCKERHUB_NAME/netmonserver" in ./server to create the server docker image.
 
-4- run "docker build . -t DOCKERHUB_NAME/netmonagent" in ./agent to create agent docker image.
+4- run "docker build . -t DOCKERHUB_NAME/netmonagent" in ./agent to create the agent docker image.
 
-5- run "docker push DOCKERHUB_NAME/netmonserver" to upload server docker image.
+5- run "docker push DOCKERHUB_NAME/netmonserver" to upload the server docker image.
 
-6- run "docker push DOCKERHUB_NAME/netmonagent" to upload agent docker image.
+6- run "docker push DOCKERHUB_NAME/netmonagent" to upload the agent docker image.
 
-7- In server machine, run "docker run -it -p 8000:8000 DOCKERHUB_NAME/netmonserver" to run server ocntainer. You will see it is listening...
+7- In the server machine, run "docker run -it -p 8000:8000 DOCKERHUB_NAME/netmonserver" to run the server ocntainer. You will see it will start to be listening...
 
-8- In each agent machine, "docker run -it -d --env NODE_NAME=NODE_NAME DOCKERHUB_NAME/netmonagent" to run agent container. * Note that NODE_NAME should be replaced regarding the node on which you run the image.
+8- In each agent machine, "docker run -it -d --env NODE_NAME=NODE_NAME DOCKERHUB_NAME/netmonagent" to run the agent container. * Note that NODE_NAME should be replaced regarding the node on which you run the image.
 
 9- Now, each agent will start to ping the others and push the results to the server. 
+
+10- To get latencies from server, use the postman collection attached to the repository
 
