@@ -59,8 +59,6 @@ function measureLinks() {
       isDataPublished = false;
     }
 
-    console.log(results);
-
     for (let node of await NODES) {
       if (node.nodeName !== NODE_NAME) {
         let response = await ping.promise.probe(node.nodeAddress);
