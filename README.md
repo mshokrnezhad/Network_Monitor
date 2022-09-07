@@ -22,7 +22,7 @@ A- run "docker push SERVER_NAME" to upload the server docker image. (SERVER_NAME
 
 B- run "docker push AGENT_NAME" to upload the agent docker image. (AGENT_NAME should be styled as: DOCKERHUB_NAME/A_NAME)
 
-4- In the server machine, run "docker run -it -p 8000:8000 SERVER_NAME" to run the server ocntainer. You will see it will start to be listening...
+4- In the server machine, run "docker run -it -p 8000:8000 SERVER_NAME" to run the server ocntainer. You will see it will start to be listening... * Make sure that port 8000 should be opened for TCP on your server.
 
 5- In each agent machine, "docker run -it -d --env NODE_NAME=NODE_NAME AGENT_NAME" to run the agent container. * Note that NODE_NAME should be replaced regarding the node on which you run the image.
 
