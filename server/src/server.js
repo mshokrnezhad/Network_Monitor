@@ -15,6 +15,7 @@ async function startServer() {
     console.log("😩 there is no minicloud available!");
     return 0;
   } else {
+    console.log(`😎 ${minicloudCounter} minicloud(s) is/are available!`);
     server.listen(PORT, () => {
       console.log(`Listening on ${PORT}...`);
     });

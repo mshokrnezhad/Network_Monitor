@@ -18,15 +18,15 @@ async function loadMiniclouds() {
       if (minicloudCounter == 0) {
         return 0;
       } else
-        console.log(nodeCounter);
-        // nodeCounter += 1;
-        // await saveNode(data);
-        // return await response.data;
+        miniclouds.map(async (minicloud) => {
+          await saveNode({ nodeName: minicloud.minicloudId, nodeAddress: minicloud.echoserverIp });
+        });
+      return minicloudCounter;
     } else {
-      console.log("😩 getting the list of miniclouds is failed!");
+      console.log(`😩 getting the list of miniclouds is failed! status code is ${response.status}`);
     }
   } catch {
-    console.log("😩 getting the list of miniclouds is failed!");
+    console.log("😩 something bad happend in getting the list of miniclouds!");
   }
 
   // return new Promise((resolve, reject) => {
