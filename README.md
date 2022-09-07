@@ -13,21 +13,20 @@ How to run?
 
 1- Update .env files in both the server and agent folders regarding your configuration.
 
-2- Update miniclouds info in nodes.csv located in ./server/data.
+2- run "docker build . -t SERVER_NAME" in ./server to create the server docker image.
 
-3- run "docker build . -t DOCKERHUB_NAME/netmonserver" in ./server to create the server docker image.
+3- run "docker build . -t AGENT_NAME" in ./agent to create the agent docker image.
 
-4- run "docker build . -t DOCKERHUB_NAME/netmonagent" in ./agent to create the agent docker image.
+if using DOCKERHUB:
+A- run "docker push SERVER_NAME" to upload the server docker image. (SERVER_NAME should be styled as: DOCKERHUB_NAME/A_NAME)
 
-5- run "docker push DOCKERHUB_NAME/netmonserver" to upload the server docker image.
+B- run "docker push AGENT_NAME" to upload the agent docker image. (AGENT_NAME should be styled as: DOCKERHUB_NAME/A_NAME)
 
-6- run "docker push DOCKERHUB_NAME/netmonagent" to upload the agent docker image.
+4- In the server machine, run "docker run -it -p 8000:8000 SERVER_NAME" to run the server ocntainer. You will see it will start to be listening...
 
-7- In the server machine, run "docker run -it -p 8000:8000 DOCKERHUB_NAME/netmonserver" to run the server ocntainer. You will see it will start to be listening...
+5- In each agent machine, "docker run -it -d --env NODE_NAME=NODE_NAME AGENT_NAME" to run the agent container. * Note that NODE_NAME should be replaced regarding the node on which you run the image.
 
-8- In each agent machine, "docker run -it -d --env NODE_NAME=NODE_NAME DOCKERHUB_NAME/netmonagent" to run the agent container. * Note that NODE_NAME should be replaced regarding the node on which you run the image.
+6- Now, each agent will start to ping the others and push the results to the server. 
 
-9- Now, each agent will start to ping the others and push the results to the server. 
-
-10- To get latencies from server, use the postman collection attached to the repository
+7- To get latencies from server, use the postman collection attached to the repository
 
