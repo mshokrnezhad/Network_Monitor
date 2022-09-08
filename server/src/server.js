@@ -7,19 +7,28 @@ const PORT = process.env.PORT || 8000;
 
 const server = http.createServer(app);
 
+// async function startServer() {
+//   await connectToMongodb();
+//   const minicloudCounter = await loadMiniclouds();
+
+//   if (minicloudCounter == 0) {
+//     console.log("😩 there is no minicloud available!");
+//     return 0;
+//   } else {
+//     console.log(`😎 ${minicloudCounter} minicloud(s) is/are available!`);
+//     server.listen(PORT, () => {
+//       console.log(`Listening on ${PORT}...`);
+//     });
+//   }
+// }
+
 async function startServer() {
   await connectToMongodb();
-  const minicloudCounter = await loadMiniclouds();
+  await loadMiniclouds();
 
-  if (minicloudCounter == 0) {
-    console.log("😩 there is no minicloud available!");
-    return 0;
-  } else {
-    console.log(`😎 ${minicloudCounter} minicloud(s) is/are available!`);
-    server.listen(PORT, () => {
-      console.log(`Listening on ${PORT}...`);
-    });
-  }
+  server.listen(PORT, () => {
+    console.log(`Listening on ${PORT}...`);
+  });
 }
 
 startServer();

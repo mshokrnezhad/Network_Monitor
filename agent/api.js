@@ -9,13 +9,15 @@ async function httpGetAllNodes() {
       url: `${API_URL}/nodes`,
     });
 
+    console.log(response)
+
     if (response.status == 200) {
       return await response.data;
     } else {
-      console.log("😩 getting the list of nodes is failed!");
+      console.log("😩 getting the list of miniclouds is failed!");
     }
   } catch {
-    console.log("😩 getting the list of nodes is failed!");
+    console.log("😩 something bad happend!");
   }
 }
 

@@ -7,6 +7,7 @@ const readline = require("readline").createInterface({
   output: process.stdout,
 });
 var PING_INTERVAL = 5000;
+var GETTING_NODES_INTERVAL = 60000;
 var PUBLISH_INTERVAL = 60000 - 1000; //15000 - 1000
 var NODES = [];
 const NODE_NAME = process.env.NODE_NAME;
@@ -14,6 +15,11 @@ var results = [];
 var isDataPublished = false;
 
 async function getAllNodes() {
+  await fetchNodes();
+  setInterval(fetchNodes, GETTING_NODES_INTERVAL);
+}
+
+async function fetchNodes() {
   NODES = await httpGetAllNodes();
 
   console.log("\nthe list of active miniclouds:");
@@ -24,14 +30,11 @@ async function getAllNodes() {
 
 function getNodeName() {
   return new Promise((resolve) =>
-    readline.question(
-      "\nwhat is the name of this minicloud (it should be one of the active miniclouds)? ",
-      (data) => {
-        NODE_NAME = data;
-        readline.close();
-        resolve(NODE_NAME);
-      }
-    )
+    readline.question("\nwhat is the name of this minicloud (it should be one of the active miniclouds)? ", (data) => {
+      NODE_NAME = data;
+      readline.close();
+      resolve(NODE_NAME);
+    })
   );
 }
 
@@ -88,25 +91,13 @@ function publishResults() {
           return result.to === node.nodeName;
         });
         const minRTT =
-          !_.isUndefined(_.minBy(nodeResults, "min")) &&
-          !_.isNaN(_.minBy(nodeResults, "min"))
-            ? _.round(_.minBy(nodeResults, "min").min, 3)
-            : -1;
+          !_.isUndefined(_.minBy(nodeResults, "min")) && !_.isNaN(_.minBy(nodeResults, "min")) ? _.round(_.minBy(nodeResults, "min").min, 3) : -1;
         const maxRTT =
-          !_.isUndefined(_.maxBy(nodeResults, "max")) &&
-          !_.isNaN(_.maxBy(nodeResults, "max"))
-            ? _.round(_.maxBy(nodeResults, "max").max, 3)
-            : -1;
+          !_.isUndefined(_.maxBy(nodeResults, "max")) && !_.isNaN(_.maxBy(nodeResults, "max")) ? _.round(_.maxBy(nodeResults, "max").max, 3) : -1;
         const avgRTT =
-          !_.isUndefined(_.meanBy(nodeResults, "avg")) &&
-          !_.isNaN(_.meanBy(nodeResults, "avg"))
-            ? _.round(_.meanBy(nodeResults, "avg"), 3)
-            : -1;
+          !_.isUndefined(_.meanBy(nodeResults, "avg")) && !_.isNaN(_.meanBy(nodeResults, "avg")) ? _.round(_.meanBy(nodeResults, "avg"), 3) : -1;
         const lossRate =
-          !_.isUndefined(_.meanBy(nodeResults, "loss")) &&
-          !_.isNaN(_.meanBy(nodeResults, "loss"))
-            ? _.round(_.meanBy(nodeResults, "loss"), 3)
-            : -1;
+          !_.isUndefined(_.meanBy(nodeResults, "loss")) && !_.isNaN(_.meanBy(nodeResults, "loss")) ? _.round(_.meanBy(nodeResults, "loss"), 3) : -1;
 
         data.push({
           date: Date.now(),

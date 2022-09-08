@@ -1,3 +1,4 @@
+
 # Net_Mon
 A RESTful network monitoring component for measuring and reporting network link latencies. 
 
@@ -18,6 +19,7 @@ How to run?
 3- run "docker build . -t AGENT_NAME" in ./agent to create the agent docker image.
 
 if using DOCKERHUB:
+
 A- run "docker push SERVER_NAME" to upload the server docker image. (SERVER_NAME should be styled as: DOCKERHUB_NAME/A_NAME)
 
 B- run "docker push AGENT_NAME" to upload the agent docker image. (AGENT_NAME should be styled as: DOCKERHUB_NAME/A_NAME)
