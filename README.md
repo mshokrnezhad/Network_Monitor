@@ -1,5 +1,5 @@
 
-# Net_Mon
+# Network_Monitor
 A RESTful network monitoring component for measuring and reporting network link latencies. 
 
 It is assumed that the IP addresses of network nodes and their names are available in advance.
